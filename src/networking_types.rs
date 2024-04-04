@@ -91,7 +91,7 @@ pub enum NetworkingConfigValue {
 	LocalVirtualPort = 38,
 	LogLevelAckRtt = 13,
 	LogLevelMessage = 15,
-	LogLevelP2PRendezvous = 17,
+	LogLevelP2pRendezvous = 17,
 	LogLevelPacketDecode = 14,
 	LogLevelPacketGaps = 16,
 	LogLevelSdrRelayPings = 18,
@@ -165,7 +165,7 @@ impl NetworkingConfigValue {
 			LocalVirtualPort => Int32,
 			LogLevelAckRtt => Int32,
 			LogLevelMessage => Int32,
-			LogLevelP2PRendezvous => Int32,
+			LogLevelP2pRendezvous => Int32,
 			LogLevelPacketDecode => Int32,
 			LogLevelPacketGaps => Int32,
 			LogLevelSdrRelayPings => Int32,
@@ -241,7 +241,7 @@ impl From<NetworkingConfigValue> for sys::ESteamNetworkingConfigValue {
 			LocalVirtualPort => k_ESteamNetworkingConfig_LocalVirtualPort,
 			LogLevelAckRtt => k_ESteamNetworkingConfig_LogLevel_AckRTT,
 			LogLevelMessage => k_ESteamNetworkingConfig_LogLevel_Message,
-			LogLevelP2PRendezvous => k_ESteamNetworkingConfig_LogLevel_P2PRendezvous,
+			LogLevelP2pRendezvous => k_ESteamNetworkingConfig_LogLevel_P2PRendezvous,
 			LogLevelPacketDecode => k_ESteamNetworkingConfig_LogLevel_PacketDecode,
 			LogLevelPacketGaps => k_ESteamNetworkingConfig_LogLevel_PacketGaps,
 			LogLevelSdrRelayPings => k_ESteamNetworkingConfig_LogLevel_SDRRelayPings,
@@ -456,7 +456,7 @@ pub enum NetConnectionEnd {
 	// If relay fallback is available (it always is on Steam), then
 	// this is only used internally and will not be returned as a high
 	// level failure.
-	LocalP2PICENoPublicAddresses,
+	LocalP2pICENoPublicAddresses,
 
 	// 4xxx: Connection failed or ended, and it appears that the
 	//       cause does NOT have to do with the local host or their
@@ -496,7 +496,7 @@ pub enum NetConnectionEnd {
 	// If relay fallback is available (it always is on Steam), then
 	// this is only used internally and will not be returned as a high
 	// level failure.
-	RemoteP2PICENoPublicAddresses,
+	RemoteP2pICENoPublicAddresses,
 
 	// A failure that isn't necessarily the result of a software bug,
 	// but that should happen rarely enough that it isn't worth specifically
@@ -526,14 +526,14 @@ pub enum NetConnectionEnd {
 
 	// P2P rendezvous failed in a way that we don't have more specific
 	// information
-	MiscP2PRendezvous,
+	MiscP2pRendezvous,
 
 	// NAT punch failed, probably due to NAT/firewall configuration.
 	//
 	// If relay fallback is available (it always is on Steam), then
 	// this is only used internally and will not be returned as a high
 	// level failure.
-	MiscP2PNATFirewall,
+	MiscP2pNatFirewall,
 
 	// Our peer replied that it has no record of the connection.
 	// This should not happen ordinarily, but can happen in a few
@@ -561,19 +561,19 @@ impl From<NetConnectionEnd> for sys::ESteamNetConnectionEnd {
 			NetConnectionEnd::LocalHostedServerPrimaryRelay => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_HostedServerPrimaryRelay,
 			NetConnectionEnd::LocalNetworkConfig => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_NetworkConfig,
 			NetConnectionEnd::LocalRights => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_Rights,
-			NetConnectionEnd::LocalP2PICENoPublicAddresses => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_P2P_ICE_NoPublicAddresses,
+			NetConnectionEnd::LocalP2pICENoPublicAddresses => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_P2P_ICE_NoPublicAddresses,
 			NetConnectionEnd::RemoteTimeout => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_Timeout,
 			NetConnectionEnd::RemoteBadEncrypt => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadCrypt,
 			NetConnectionEnd::RemoteBadCert => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadCert,
 			NetConnectionEnd::RemoteBadProtocolVersion => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadProtocolVersion,
-			NetConnectionEnd::RemoteP2PICENoPublicAddresses => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_P2P_ICE_NoPublicAddresses,
+			NetConnectionEnd::RemoteP2pICENoPublicAddresses => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_P2P_ICE_NoPublicAddresses,
 			NetConnectionEnd::MiscGeneric => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_Generic,
 			NetConnectionEnd::MiscInternalError => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_InternalError,
 			NetConnectionEnd::MiscTimeout => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_Timeout,
 			NetConnectionEnd::MiscSteamConnectivity => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_SteamConnectivity,
 			NetConnectionEnd::MiscNoRelaySessionsToClient => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_NoRelaySessionsToClient,
-			NetConnectionEnd::MiscP2PRendezvous => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_Rendezvous,
-			NetConnectionEnd::MiscP2PNATFirewall => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_NAT_Firewall,
+			NetConnectionEnd::MiscP2pRendezvous => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_Rendezvous,
+			NetConnectionEnd::MiscP2pNatFirewall => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_NAT_Firewall,
 			NetConnectionEnd::MiscPeerSentNoConnection => sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_PeerSentNoConnection,
 		}
 	}
@@ -603,7 +603,7 @@ impl TryFrom<i32> for NetConnectionEnd {
 			}
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_Rights as i32 => Ok(NetConnectionEnd::LocalRights),
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_P2P_ICE_NoPublicAddresses as i32 => {
-				Ok(NetConnectionEnd::LocalP2PICENoPublicAddresses)
+				Ok(NetConnectionEnd::LocalP2pICENoPublicAddresses)
 			}
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_Timeout as i32 => Ok(NetConnectionEnd::RemoteTimeout),
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadCrypt as i32 => Ok(NetConnectionEnd::RemoteBadEncrypt),
@@ -612,7 +612,7 @@ impl TryFrom<i32> for NetConnectionEnd {
 				Ok(NetConnectionEnd::RemoteBadProtocolVersion)
 			}
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_P2P_ICE_NoPublicAddresses as i32 => {
-				Ok(NetConnectionEnd::RemoteP2PICENoPublicAddresses)
+				Ok(NetConnectionEnd::RemoteP2pICENoPublicAddresses)
 			}
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_Generic as i32 => Ok(NetConnectionEnd::MiscGeneric),
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_InternalError as i32 => Ok(NetConnectionEnd::MiscInternalError),
@@ -623,9 +623,9 @@ impl TryFrom<i32> for NetConnectionEnd {
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_NoRelaySessionsToClient as i32 => {
 				Ok(NetConnectionEnd::MiscNoRelaySessionsToClient)
 			}
-			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_Rendezvous as i32 => Ok(NetConnectionEnd::MiscP2PRendezvous),
+			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_Rendezvous as i32 => Ok(NetConnectionEnd::MiscP2pRendezvous),
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_NAT_Firewall as i32 => {
-				Ok(NetConnectionEnd::MiscP2PNATFirewall)
+				Ok(NetConnectionEnd::MiscP2pNatFirewall)
 			}
 			end if end == sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_PeerSentNoConnection as i32 => {
 				Ok(NetConnectionEnd::MiscPeerSentNoConnection)
@@ -645,19 +645,19 @@ impl From<sys::ESteamNetConnectionEnd> for NetConnectionEnd {
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_HostedServerPrimaryRelay => NetConnectionEnd::LocalHostedServerPrimaryRelay,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_NetworkConfig => NetConnectionEnd::LocalNetworkConfig,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_Rights => NetConnectionEnd::LocalRights,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_P2P_ICE_NoPublicAddresses => NetConnectionEnd::LocalP2PICENoPublicAddresses,
+			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_P2P_ICE_NoPublicAddresses => NetConnectionEnd::LocalP2pICENoPublicAddresses,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_Timeout => NetConnectionEnd::RemoteTimeout,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadCrypt => NetConnectionEnd::RemoteBadEncrypt,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadCert => NetConnectionEnd::RemoteBadCert,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadProtocolVersion => NetConnectionEnd::RemoteBadProtocolVersion,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_P2P_ICE_NoPublicAddresses => NetConnectionEnd::RemoteP2PICENoPublicAddresses,
+			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_P2P_ICE_NoPublicAddresses => NetConnectionEnd::RemoteP2pICENoPublicAddresses,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_Generic => NetConnectionEnd::MiscGeneric,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_InternalError => NetConnectionEnd::MiscInternalError,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_Timeout => NetConnectionEnd::MiscTimeout,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_SteamConnectivity => NetConnectionEnd::MiscSteamConnectivity,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_NoRelaySessionsToClient => NetConnectionEnd::MiscNoRelaySessionsToClient,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_Rendezvous => NetConnectionEnd::MiscP2PRendezvous,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_NAT_Firewall => NetConnectionEnd::MiscP2PNATFirewall,
+			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_Rendezvous => NetConnectionEnd::MiscP2pRendezvous,
+			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_NAT_Firewall => NetConnectionEnd::MiscP2pNatFirewall,
 			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_PeerSentNoConnection => NetConnectionEnd::MiscPeerSentNoConnection,
 			_ => panic!("invalid connection end"),
 		}
