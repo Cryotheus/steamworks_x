@@ -1,5 +1,5 @@
 ignore = [
-    "steamworks-x-sys",
+    "steamworks_x_sys",
 ]
 
 hard_tabs = true

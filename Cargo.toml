@@ -5,8 +5,8 @@ description = "Safe wrapper for the Steamworks SDK."
 edition = "2021"
 keywords = ["steam", "gamedev"]
 license = "MIT / Apache-2.0"
-name = "steamworks-x"
-repository = "https://github.com/Cryotheus/steamworks-x-rs"
+name = "steamworks_x"
+repository = "https://github.com/Cryotheus/steamworks_x-rs"
 rust-version = "1.71.1"
 version = "0.11.0"
 
@@ -16,14 +16,14 @@ raw-bindings = []
 
 [workspace]
 members = [
-    "./steamworks-x-sys",
+    "./steamworks_x_sys",
 ]
 
 [dependencies]
 bitflags = "1.2"
 lazy_static = "1.4"
 serde = { version = "1.0", features = ["derive"], optional = true }
-steamworks-x-sys = { path = "./steamworks-x-sys", version = "0.11.0" }
+steamworks_x_sys = { path = "./steamworks_x_sys", version = "0.11.0" }
 thiserror = "1.0"
 
 [dev-dependencies]
