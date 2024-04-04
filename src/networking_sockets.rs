@@ -1047,7 +1047,7 @@ mod tests {
 		sockets.init_authentication().unwrap();
 
 		let debug_config = vec![NetworkingConfigEntry::new_int32(
-			NetworkingConfigValue::IPAllowWithoutAuth,
+			NetworkingConfigValue::IpAllowWithoutAuth,
 			1,
 		)];
 
