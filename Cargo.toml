@@ -1,15 +1,14 @@
 [package]
-name = "steamworks"
-version = "0.11.0"
-authors = ["Thinkofname"]
-description = "Provides rust friendly bindings to the steamworks sdk"
-license = "MIT / Apache-2.0"
-repository = "https://github.com/Noxime/steamworks-rs"
-documentation = "https://docs.rs/steamworks"
-keywords = ["steam", "gamedev"]
+authors = ["Cryotheum"]
 categories = ["games"]
+description = "Safe wrapper for the Steamworks SDK."
 edition = "2021"
+keywords = ["steam", "gamedev"]
+license = "MIT / Apache-2.0"
+name = "steamworks-x"
+repository = "https://github.com/Cryotheus/steamworks-x-rs"
 rust-version = "1.71.1"
+version = "0.11.0"
 
 [features]
 default = []
@@ -17,17 +16,15 @@ raw-bindings = []
 
 [workspace]
 members = [
-    "./steamworks-sys",
-    "examples/chat-example",
-    "examples/workshop"
+    "./steamworks-x-sys",
 ]
 
 [dependencies]
-steamworks-sys = { path = "./steamworks-sys", version = "0.11.0" }
-thiserror = "1.0"
 bitflags = "1.2"
 lazy_static = "1.4"
 serde = { version = "1.0", features = ["derive"], optional = true }
+steamworks-x-sys = { path = "./steamworks-x-sys", version = "0.11.0" }
+thiserror = "1.0"
 
 [dev-dependencies]
 serial_test = "1"
