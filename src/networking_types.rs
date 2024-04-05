@@ -637,28 +637,31 @@ impl TryFrom<i32> for NetConnectionEnd {
 
 impl From<sys::ESteamNetConnectionEnd> for NetConnectionEnd {
 	fn from(end: steamworks_x_sys::ESteamNetConnectionEnd) -> Self {
+		use sys::ESteamNetConnectionEnd;
+		use NetConnectionEnd::*;
+
 		match end {
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_App_Generic => NetConnectionEnd::AppGeneric,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_AppException_Generic => NetConnectionEnd::AppException,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_OfflineMode => NetConnectionEnd::LocalOfflineMode,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_ManyRelayConnectivity => NetConnectionEnd::LocalManyRelayConnectivity,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_HostedServerPrimaryRelay => NetConnectionEnd::LocalHostedServerPrimaryRelay,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_NetworkConfig => NetConnectionEnd::LocalNetworkConfig,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_Rights => NetConnectionEnd::LocalRights,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_P2P_ICE_NoPublicAddresses => NetConnectionEnd::LocalP2pICENoPublicAddresses,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_Timeout => NetConnectionEnd::RemoteTimeout,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadCrypt => NetConnectionEnd::RemoteBadEncrypt,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadCert => NetConnectionEnd::RemoteBadCert,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadProtocolVersion => NetConnectionEnd::RemoteBadProtocolVersion,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_P2P_ICE_NoPublicAddresses => NetConnectionEnd::RemoteP2pICENoPublicAddresses,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_Generic => NetConnectionEnd::MiscGeneric,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_InternalError => NetConnectionEnd::MiscInternalError,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_Timeout => NetConnectionEnd::MiscTimeout,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_SteamConnectivity => NetConnectionEnd::MiscSteamConnectivity,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_NoRelaySessionsToClient => NetConnectionEnd::MiscNoRelaySessionsToClient,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_Rendezvous => NetConnectionEnd::MiscP2pRendezvous,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_NAT_Firewall => NetConnectionEnd::MiscP2pNatFirewall,
-			sys::ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_PeerSentNoConnection => NetConnectionEnd::MiscPeerSentNoConnection,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_App_Generic => AppGeneric,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_AppException_Generic => AppException,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_HostedServerPrimaryRelay => LocalHostedServerPrimaryRelay,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_ManyRelayConnectivity => LocalManyRelayConnectivity,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_NetworkConfig => LocalNetworkConfig,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_OfflineMode => LocalOfflineMode,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_P2P_ICE_NoPublicAddresses => LocalP2pICENoPublicAddresses,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Local_Rights => LocalRights,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_Generic => MiscGeneric,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_InternalError => MiscInternalError,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_NoRelaySessionsToClient => MiscNoRelaySessionsToClient,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_NAT_Firewall => MiscP2pNatFirewall,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_P2P_Rendezvous => MiscP2pRendezvous,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_PeerSentNoConnection => MiscPeerSentNoConnection,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_SteamConnectivity => MiscSteamConnectivity,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Misc_Timeout => MiscTimeout,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadCert => RemoteBadCert,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadCrypt => RemoteBadEncrypt,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_BadProtocolVersion => RemoteBadProtocolVersion,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_P2P_ICE_NoPublicAddresses => RemoteP2pICENoPublicAddresses,
+			ESteamNetConnectionEnd::k_ESteamNetConnectionEnd_Remote_Timeout => RemoteTimeout,
 			_ => panic!("invalid connection end"),
 		}
 	}
