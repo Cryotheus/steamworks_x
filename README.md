@@ -1,3 +1,5 @@
+# Obsoleted by [rgpr_steamworks](https://github.com/Cryotheus/rgpr_steamworks).
+
 # Steamworks X
 Work in progress.
 
